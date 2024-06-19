@@ -41,7 +41,7 @@ pipeline {
         stage('Terraform Plan') {
             steps {
                 withCredentials([azureServicePrincipal(
-                    credentialsId: 'azurelogin',
+                    credentialsId: 'admin',
                     subscriptionIdVariable: 'ARM_SUBSCRIPTION_ID',
                     clientIdVariable: 'ARM_CLIENT_ID',
                     clientSecretVariable: 'ARM_CLIENT_SECRET',
@@ -58,7 +58,7 @@ pipeline {
         stage('Terraform Apply') {
             steps {
                 withCredentials([azureServicePrincipal(
-                    credentialsId: 'azurelogin',
+                    credentialsId: 'admin',
                     subscriptionIdVariable: 'ARM_SUBSCRIPTION_ID',
                     clientIdVariable: 'ARM_CLIENT_ID',
                     clientSecretVariable: 'ARM_CLIENT_SECRET',
