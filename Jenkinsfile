@@ -8,7 +8,6 @@ pipeline {
     stages {
         stage('Git checkout') {
             steps {
-                
                 git 'https://github.com/krupasuhagiya/Terraform_JK.git'
             }
         }
