@@ -8,6 +8,7 @@ pipeline {
     stages {
         stage('Git checkout') {
             steps {
+                
                 git 'https://github.com/krupasuhagiya/Terraform_JK.git'
             }
         }
@@ -21,6 +22,7 @@ pipeline {
         }
 
         stage('Terraform Init') {
+
             steps {
                 bat '''
                     echo "Initialising Terraform"
@@ -28,7 +30,7 @@ pipeline {
                 '''
             }
         }
-
+    
         stage('Terraform Validate') {
             steps {
                 bat '''
