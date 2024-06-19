@@ -1,40 +1,36 @@
-# Configure the Azure provider
 provider "azurerm" {
   features {}
 }
 
-# Create a resource group
 resource "azurerm_resource_group" "example" {
-  name     = "example-resources"
-  location = "West Europe"
+  name     = var.resource_group_name
+  location = var.location
 }
 
-# Create an App Service Plan
 resource "azurerm_service_plan" "example" {
-  name                = "example-appserviceplan"
-  location            = azurerm_resource_group.example.location
-  resource_group_name = azurerm_resource_group.example.name
+  name                = var.app_service_plan_name
+  location            = var.location
+  resource_group_name = var.resource_group_name
+
   sku {
-    tier     = "Standard"
-    size     = "S1"
+    tier = var.app_service_plan_tier
+    size = var.app_service_plan_size
   }
 }
 
-# Create an App Service
 resource "azurerm_app_service" "example" {
-  name                = "example-appservice"
-  location            = azurerm_resource_group.example.location
-  resource_group_name = azurerm_resource_group.example.name
-  app_service_plan_id = azurerm_app_service_plan.example.id
+  name                = var.app_service_name
+  location            = var.location
+  resource_group_name = var.resource_group_name
+  service_plan_id     = azurerm_service_plan.example.id
 
   site_config {
     always_on = true
   }
 
-  app_settings = {
-    "WEBSITE_RUN_FROM_PACKAGE" = "1"
-  }
+  app_settings = var.app_settings
 }
+
 
 # Optional: Output the App Service URL
 output "app_service_default_hostname" {
