@@ -31,6 +31,11 @@ variable "app_service_name" {
   type        = string
 }
 
+variable "os_type" {
+  description = "The name of the App Service"
+  type        = string
+}
+
 variable "app_settings" {
   description = "A map of app settings"
   type        = map(string)
