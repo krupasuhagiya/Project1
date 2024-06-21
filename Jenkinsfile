@@ -8,7 +8,7 @@ pipeline {
     stages {
         stage('Git checkout') {
             steps {
-                
+
                 git 'https://github.com/krupasuhagiya/Terraform_JK.git'
             }
         }
@@ -51,7 +51,8 @@ pipeline {
                 )]) {
                     bat '''
                         echo "Planning Terraform"
-                        terraform plan
+                        terraform plan -out=plan.tfplan
+
                     '''
                 }
             }
@@ -68,7 +69,8 @@ pipeline {
                 )]) {
                     bat '''
                         echo "Applying Terraform"
-                        terraform apply -lock=false -auto-approve
+                        terraform apply plan.tfplan
+
                     '''
                 }
             }
